@@ -1,5 +1,8 @@
 <resources>
         <string name="app_name">My_test0</string>
+        <string name="facebook_app_id">973832529621944</string>
+        <string name="fb_login_protocol_scheme">fb973832529621944</string>
+
 
         <!-- Sign In -->
         <string name="email">Email</string>
