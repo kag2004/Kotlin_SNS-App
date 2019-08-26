@@ -131,9 +131,20 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+    //페이스북 로그인 하고 난 후 뭐가 로그인 됐는지 롤백 하기 위한 장소
     fun handleFacebookAccessToken(token: AccessToken?){
         var credential = FacebookAuthProvider.getCredential(token?.token!!)
-        auth?.signInWithCredential(credential)
+        auth?.signInWithCredential(credential)?.addOnCompleteListener {
+            task ->
+            if(task.isSuccessful){
+                moveMainPage(auth?.currentUser)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        moveMainPage(auth?.currentUser)
     }
 
     //페이스북 , 구글 등 여러개 펑션이 가져 와야해서 구분 해줘야 한다 그건 fun XXX에서 넘겨 줄때 적어서 보냄
